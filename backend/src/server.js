@@ -4,7 +4,7 @@ import session from "express-session";
 // import connectStore from "connect-mongo";
 const MongoStore = require("connect-mongo").default;
 
-import { userRoutes } from "./routes/index";
+import { userRoutes, sessionRoutes } from "./routes/index";
 import {
   PORT,
   NODE_ENV,
@@ -51,6 +51,7 @@ import {
     const apiRouter = express.Router();
     app.use("/api", apiRouter);
     apiRouter.use("/users", userRoutes);
+    apiRouter.use("/session", sessionRoutes);
 
     app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   } catch (err) {
