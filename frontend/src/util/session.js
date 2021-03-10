@@ -1,28 +1,35 @@
-export const signup = (user) =>
-  fetch("http://localhost:5000/api/users", {
+export const login = user => (
+  fetch("api/session", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
-      "Content-Type": "application/json",
-    },
-  });
-export const login = (user) =>
-  fetch("http://localhost:5000/api/session", {
+      "Content-Type": "application/json"
+    }
+  })
+);
+
+export const signup = user => (
+  fetch("api/users", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
-      "Content-Type": "application/json",
-    },
-  });
-export const checkLoggedIn = async (preloadedState) => {
-  const response = await fetch("http://localhost:5000/api/session");
+      "Content-Type": "application/json"
+    }
+  })
+);
+
+export const logout = () => (
+  fetch("api/session", { method: "DELETE" })
+);
+
+export const checkLoggedIn = async () => {
+  const response = await fetch('/api/session');
   const { user } = await response.json();
-  // let preloadedState = {};
+  let preloadedState = {};
   if (user) {
     preloadedState = {
-      session: user,
+      session: user
     };
   }
   return preloadedState;
 };
-export const logout = () => fetch("api/session", { method: "DELETE" });

@@ -2,21 +2,27 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../actions/session";
+
 const mapStateToProps = ({ errors }) => ({
-  errors,
+  errors
 });
-const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user)),
+
+const mapDispatchToProps = dispatch => ({
+  login: user => dispatch(login(user))
 });
+
 const Login = ({ errors, login }) => {
-  const handleSubmit = (e) => {
+
+  const handleSubmit = e => {
     e.preventDefault();
     const user = {
       email: e.target[0].value,
       password: e.target[1].value,
     };
+
     login(user);
-  };
+  }
+
   return (
     <>
       <h1>Login</h1>
@@ -36,4 +42,8 @@ const Login = ({ errors, login }) => {
     </>
   );
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
