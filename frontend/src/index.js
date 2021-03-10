@@ -1,5 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-// delete old imports we don't need
-ReactDOM.render(<App />, document.getElementById("root"));
+import configureStore from "./store/store";
+import { Provider } from "react-redux";
+let preloadedState = {};
+const store = configureStore(preloadedState);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+// FOR TESTING, remove before production
+window.getState = store.getState;
