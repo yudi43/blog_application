@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import session from "express-session";
 // import connectStore from "connect-mongo";
 const MongoStore = require("connect-mongo").default;
+const cors = require("cors");
 
 import { userRoutes, sessionRoutes } from "./routes/index";
 import {
@@ -49,6 +50,7 @@ import {
     );
 
     const apiRouter = express.Router();
+    app.use(cors());
     app.use("/api", apiRouter);
     apiRouter.use("/users", userRoutes);
     apiRouter.use("/session", sessionRoutes);
