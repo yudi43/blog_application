@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Form } from "./Form";
 import FocusTrap from "focus-trap-react";
 export const Modal = ({
+  username,
   onClickOutside,
   onKeyDown,
   modalRef,
@@ -37,7 +38,7 @@ export const Modal = ({
             </svg>
           </button>
           <div className="modal-body">
-            <Form onSubmit={onSubmit} />
+            <Form onSubmit={onSubmit} close={closeModal} username={username} />
           </div>
         </div>
       </aside>

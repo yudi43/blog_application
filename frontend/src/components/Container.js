@@ -37,6 +37,7 @@ export class Container extends Component {
         />
         {this.state.isShown ? (
           <Modal
+            username={this.props.username}
             onSubmit={this.props.onSubmit}
             modalRef={(n) => (this.modal = n)}
             buttonRef={(n) => (this.closeButton = n)}

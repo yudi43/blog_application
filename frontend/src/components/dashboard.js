@@ -38,7 +38,11 @@ const Dashboard = ({ logout, session }) => {
             width: "150px",
           }}
         ></div>
-        <Container triggerText={triggerText} onSubmit={onSubmit} />
+        <Container
+          triggerText={triggerText}
+          onSubmit={onSubmit}
+          username={session.username}
+        />
 
         <Button onClick={logout}>Logout</Button>
       </div>

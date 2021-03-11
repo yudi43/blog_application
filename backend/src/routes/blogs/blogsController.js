@@ -6,6 +6,7 @@ const callbacks = {
     const { title, content, pictureid, username } = req.body;
     const blogid = shortid.generate();
     const timestamp = new Date();
+    console.log(req.body);
     try {
       const newblog = await BlogModel.create({
         blogid,
@@ -41,7 +42,7 @@ const callbacks = {
       console.log(error);
     }
     return res.json({
-      message: "New blog created.",
+      message: "Blog Updated.",
     });
   },
 
@@ -68,7 +69,7 @@ const callbacks = {
       console.log(error);
     }
     return res.json({
-      message: "New blog created.",
+      message: "Blog deleted.",
     });
   },
 };
