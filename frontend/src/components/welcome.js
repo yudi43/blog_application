@@ -3,9 +3,20 @@ import { Link } from "react-router-dom";
 
 export default () => (
   <>
-    <h1>Welcome!</h1>
-    <Link to="/login">Login</Link>
-    <Link to="/signup">Signup</Link>
-    <Link to="/dashboard">Dashboard</Link>
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <h1>Blog App</h1>
+      <Link to="/login">Login</Link>
+      <div></div>
+      <Link to="/signup">Signup</Link>
+      <div></div>
+      <Link to="/dashboard">Dashboard</Link>
+    </div>
   </>
 );

@@ -12,28 +12,59 @@ export const Form = (props) => {
   const onSubmit = async (event) => {
     event.preventDefault(event);
 
-    const storageRef = firebase_app.storage().ref();
-    const fileRef = storageRef.child(img[0].name);
-    await fileRef.put(img[0]);
-    const fileUrl = await fileRef.getDownloadURL();
-    const blogid = shortid.generate();
+    if (props.type != "update") {
+      const storageRef = firebase_app.storage().ref();
+      const fileRef = storageRef.child(img[0].name);
+      await fileRef.put(img[0]);
+      const fileUrl = await fileRef.getDownloadURL();
+      const blogid = shortid.generate();
 
-    const blogData = {
-      blogid,
-      title,
-      content,
-      pictureid: fileUrl,
-      username: props.username,
-      timestamp: Date().toLocaleString(),
-    };
+      const blogData = {
+        blogid,
+        title,
+        content,
+        pictureid: fileUrl,
+        username: props.username,
+        timestamp: Date().toLocaleString(),
+      };
 
-    axios
-      .post(`http://localhost:5000/blogs/createBlog`, { blogData })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
-    console.log(fileUrl);
+      axios
+        .post(`https://ppagolb.herokuapp.com/blogs/createBlog`, blogData)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        })
+        .then(() => {
+          props.close();
+        });
+      console.log(fileUrl);
+    } else {
+      // blogidold
+      //blogid, title, content, pictureid, username
+      const storageRef = firebase_app.storage().ref();
+      const fileRef = storageRef.child(img[0].name);
+      await fileRef.put(img[0]);
+      const fileUrl = await fileRef.getDownloadURL();
+
+      const blogData = {
+        blogid: props.blogidold,
+        title,
+        content,
+        pictureid: fileUrl,
+        username: props.username,
+      };
+
+      axios
+        .post(`https://ppagolb.herokuapp.com/blogs/updateBlog`, blogData)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        })
+        .then(() => {
+          props.close();
+        });
+      console.log(fileUrl);
+    }
   };
 
   const uploadImage = (event) => {
